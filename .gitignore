@@ -1,6 +1,7 @@
 # Compiled source #
 ###################
 *.out
+zjs
 
 # OS generated files #
 ######################

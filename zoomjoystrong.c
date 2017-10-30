@@ -1,9 +1,17 @@
+/**
+ * Creates a drawable window.
+ *
+ * @author Ira Woodring
+ */
+
 #include "zoomjoystrong.h"
 #include <math.h>
 #include <SDL2/SDL.h>
 
+/// Red value, green value, and blue value to generate color.
 struct color current;
 
+/// Set up graphics window at size 1024x768 for drawing.
 void setup(){
     window = SDL_CreateWindow
         (
@@ -28,6 +36,7 @@ void setup(){
     current.g = 0;
 }
 
+/// Sets the color of current drawn image to the RGB values given.
 void set_color( int r, int g, int b){
     current.r = r;
     current.b = g;
@@ -35,6 +44,7 @@ void set_color( int r, int g, int b){
     SDL_SetRenderDrawColor( renderer, r, g, b, 255);
 }
 
+/// Draws a point at the x and y value.
 void point( int x, int y ){
     SDL_SetRenderTarget(renderer, texture);
     SDL_RenderDrawPoint(renderer, x, y);    
@@ -43,6 +53,7 @@ void point( int x, int y ){
     SDL_RenderPresent(renderer);
 }
 
+/// Draws a line at the x and y start value and ends it at the x and y end value.
 void line( int x1, int y1, int x2, int y2 ){
     SDL_SetRenderTarget(renderer, texture);
     SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
@@ -51,6 +62,7 @@ void line( int x1, int y1, int x2, int y2 ){
     SDL_RenderPresent(renderer);
 }
 
+/// Draws a circle at the x and y value with a radius set by the pixels given.
 void circle(int x, int y, int r){
     for(float i=0; i<2 * 3.14; i+=.01){
         float u = x + r * cos(i);
@@ -59,6 +71,7 @@ void circle(int x, int y, int r){
     }
 } 
 
+/// Draws a rectangle at the x and y value with a width and height set by the pixels given.
 void rectangle(int x, int y, int w, int h){
     SDL_Rect rect;
     rect.x = x;
@@ -72,6 +85,7 @@ void rectangle(int x, int y, int w, int h){
         SDL_RenderPresent(renderer);
 }
 
+/// Safely closes the graphics screen.
 void finish(){
     SDL_Delay(5000);
     SDL_DestroyWindow(window);

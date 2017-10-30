@@ -111,7 +111,10 @@ end:
 extern FILE *yyin;
 
 int main(int argc, char** argv) {
+	/// Setup window.
 	setup();
+	/// Read command line file argument.
 	yyin = fopen(argv[1], "r");
+	/// Rarse the text.
 	yyparse();
 }	

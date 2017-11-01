@@ -752,47 +752,47 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 10 "zoomjoystrong.lex"
-{return END;}
+return END;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 11 "zoomjoystrong.lex"
-{return END_STATEMENT;}
+return END_STATEMENT;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 12 "zoomjoystrong.lex"
-{return POINT;}
+return POINT;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 13 "zoomjoystrong.lex"
-{return LINE;}
+return LINE;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 14 "zoomjoystrong.lex"
-{return CIRCLE;}
+return CIRCLE;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 15 "zoomjoystrong.lex"
-{return RECTANGLE;}
+return RECTANGLE;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 16 "zoomjoystrong.lex"
-{return SET_COLOR;}
+return SET_COLOR;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 17 "zoomjoystrong.lex"
-{yylval.iVal = atoi(yytext); return INT;}
+yylval.iVal = atoi(yytext); return INT;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 18 "zoomjoystrong.lex"
-{yylval.fVal = atof(yytext); return FLOAT;}
+yylval.fVal = atof(yytext); return FLOAT;
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
@@ -803,7 +803,7 @@ YY_RULE_SETUP
 case 11:
 YY_RULE_SETUP
 #line 20 "zoomjoystrong.lex"
-{printf("Bad syntax.");}
+printf("Bad syntax.");
 	YY_BREAK
 case 12:
 YY_RULE_SETUP

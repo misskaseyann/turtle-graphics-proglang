@@ -97,12 +97,23 @@
 #include <stdio.h>
 #include "zoomjoystrong.h"
 
+/* Token/value pairs for yyparse() to read. */
 int yylex();
 
+/**
+ * Handles error reporting by closing the program and printing out the error.
+ *
+ * @param str pointer to characters for a string.
+ */
 void yyerror(const char *str) {
 	printf("error: %s\n", str);
 }
 
+/**
+ * Called when input is exhausted.
+ * 
+ * @return 1 to state we are done.
+ */
 int yywrap() {
 	return 1;
 }
@@ -129,13 +140,13 @@ int yywrap() {
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 17 "zoomjoystrong.y"
+#line 28 "zoomjoystrong.y"
 {
 	int iVal;
 	float fVal;
 }
 /* Line 193 of yacc.c.  */
-#line 139 "zoomjoystrong.tab.c"
+#line 150 "zoomjoystrong.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -148,7 +159,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 152 "zoomjoystrong.tab.c"
+#line 163 "zoomjoystrong.tab.c"
 
 #ifdef short
 # undef short
@@ -436,8 +447,8 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    35,    35,    39,    40,    44,    45,    46,    47,    48,
-      52,    62,    72,    82,    92,   102
+       0,    46,    46,    50,    51,    55,    56,    57,    58,    59,
+      63,    77,    91,   105,   119,   133
 };
 #endif
 
@@ -1354,58 +1365,79 @@ yyreduce:
   switch (yyn)
     {
         case 10:
-#line 53 "zoomjoystrong.y"
+#line 64 "zoomjoystrong.y"
     {
-		if ((yyvsp[(2) - (4)].iVal) > 1024 || (yyvsp[(2) - (4)].iVal) < 0 || (yyvsp[(3) - (4)].iVal) > 768 || (yyvsp[(3) - (4)].iVal) < 0)
+		// Check if our point is within the bounds of the screen.
+		if ((yyvsp[(2) - (4)].iVal) > 1024 || (yyvsp[(2) - (4)].iVal) < 0 || (yyvsp[(3) - (4)].iVal) > 768 || (yyvsp[(3) - (4)].iVal) < 0) {
+			// If the point is outside the drawable area, tell the user.
 			printf("Out of bounds.");
-		else
+		} else {
+			// Draw the point on our screen in x,y coordinates.
 			point((yyvsp[(2) - (4)].iVal), (yyvsp[(3) - (4)].iVal)); 
+		}
 	;}
     break;
 
   case 11:
-#line 63 "zoomjoystrong.y"
+#line 78 "zoomjoystrong.y"
     {
-		if ((yyvsp[(2) - (6)].iVal) > 1024 || (yyvsp[(2) - (6)].iVal) < 0 || (yyvsp[(3) - (6)].iVal) > 768 || (yyvsp[(3) - (6)].iVal) < 0)
+		// Check if our line is within the bounds of the screen.
+		if ((yyvsp[(2) - (6)].iVal) > 1024 || (yyvsp[(2) - (6)].iVal) < 0 || (yyvsp[(3) - (6)].iVal) > 768 || (yyvsp[(3) - (6)].iVal) < 0 || (yyvsp[(4) - (6)].iVal) < 0 || (yyvsp[(5) - (6)].iVal) < 0) {
+			// If the line is outside the drawable area, tell the user.
 			printf("Out of bounds.");
-		else
+		} else {
+			// Draw the line on our screen in x,y coordinates.
 			line((yyvsp[(2) - (6)].iVal), (yyvsp[(3) - (6)].iVal), (yyvsp[(4) - (6)].iVal), (yyvsp[(5) - (6)].iVal));
+		}
 	;}
     break;
 
   case 12:
-#line 73 "zoomjoystrong.y"
+#line 92 "zoomjoystrong.y"
     {
-		if ((yyvsp[(2) - (5)].iVal) > 1024 || (yyvsp[(2) - (5)].iVal) < 0 || (yyvsp[(3) - (5)].iVal) > 768 || (yyvsp[(3) - (5)].iVal) < 0)
+		// Check if our circle is within the bounds of the screen.
+		if ((yyvsp[(2) - (5)].iVal) > 1024 || (yyvsp[(2) - (5)].iVal) < 0 || (yyvsp[(3) - (5)].iVal) > 768 || (yyvsp[(3) - (5)].iVal) < 0 || (yyvsp[(4) - (5)].iVal) < 1) {
+			// If the circle is outside the drawable area, tell the user.
 			printf("Out of bounds.");
-		else
+		} else {
+			// Draw the circle on our screen in x,y coordinates.
 			circle((yyvsp[(2) - (5)].iVal), (yyvsp[(3) - (5)].iVal), (yyvsp[(4) - (5)].iVal));
+		}
 	;}
     break;
 
   case 13:
-#line 83 "zoomjoystrong.y"
+#line 106 "zoomjoystrong.y"
     {
-		if ((yyvsp[(2) - (6)].iVal) > 1024 || (yyvsp[(2) - (6)].iVal) < 0 || (yyvsp[(3) - (6)].iVal) > 768 || (yyvsp[(3) - (6)].iVal) < 0)
+		// Check if our rectangle is within the bounds of the screen.
+		if ((yyvsp[(2) - (6)].iVal) > 1024 || (yyvsp[(2) - (6)].iVal) < 0 || (yyvsp[(3) - (6)].iVal) > 768 || (yyvsp[(3) - (6)].iVal) < 0 || (yyvsp[(4) - (6)].iVal) < 1 || (yyvsp[(5) - (6)].iVal) < 1) {
+			// If the rectangle is outside the drawable area, tell the user.
                         printf("Out of bounds.");
-                else
+                } else {
+			// Draw the rectangle on our screen in x,y coordinates.
 			rectangle((yyvsp[(2) - (6)].iVal), (yyvsp[(3) - (6)].iVal), (yyvsp[(4) - (6)].iVal), (yyvsp[(5) - (6)].iVal));
+		}
 	;}
     break;
 
   case 14:
-#line 93 "zoomjoystrong.y"
+#line 120 "zoomjoystrong.y"
     {
-		if ((yyvsp[(2) - (5)].iVal) > 255 || (yyvsp[(2) - (5)].iVal) < 0 || (yyvsp[(3) - (5)].iVal) > 255 || (yyvsp[(3) - (5)].iVal) < 0 || (yyvsp[(4) - (5)].iVal) > 255 || (yyvsp[(4) - (5)].iVal) < 0)
+		// Check if our color is a valid RGB value.
+		if ((yyvsp[(2) - (5)].iVal) > 255 || (yyvsp[(2) - (5)].iVal) < 0 || (yyvsp[(3) - (5)].iVal) > 255 || (yyvsp[(3) - (5)].iVal) < 0 || (yyvsp[(4) - (5)].iVal) > 255 || (yyvsp[(4) - (5)].iVal) < 0) {
+			// If it is not a valid RGB value, then tell the user.
 			printf("Not a valid rgb set of values.");
-		else
+		} else {
+			// Set the color of the last drawable image.
 			set_color((yyvsp[(2) - (5)].iVal), (yyvsp[(3) - (5)].iVal), (yyvsp[(4) - (5)].iVal));
+		}
 	;}
     break;
 
   case 15:
-#line 103 "zoomjoystrong.y"
+#line 134 "zoomjoystrong.y"
     {
+		// Close our renderable screen and finish the program.
 		finish();
 		return 0;
 	;}
@@ -1413,7 +1445,7 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
-#line 1417 "zoomjoystrong.tab.c"
+#line 1449 "zoomjoystrong.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1627,14 +1659,24 @@ yyreturn:
 }
 
 
-#line 109 "zoomjoystrong.y"
+#line 141 "zoomjoystrong.y"
 
 
+/* Input stream from reading a file. */
 extern FILE *yyin;
 
+/**
+ * Main function for our program.
+ *
+ * @param argc value of command line arguments.
+ * @param argv pointer to a pointer of a string of characters that are our arguments.
+ */
 int main(int argc, char** argv) {
+	// Set up our rendering screen in SDL2.
 	setup();
+	// Check if there is a readable file and set it to the input stream.
 	yyin = fopen(argv[1], "r");
+	// Parse whats on our screen.
 	yyparse();
 }	
 
